@@ -28,11 +28,24 @@ public class ReadFile extends JFrame{
         display.addHyperlinkListener(
             new Hyperlinklistener(){
                 public void hyperlinkupdate(HyperlinkEvent event)
-                    if(event.getType()==HyperlinkEvent.EventType.ACTIVATED){
+                    if(event.getEventType()==HyperlinkEvent.EventType.ACTIVATED){
                         loadpage(event.getURL().toString());
                     }
             }
         );
+        add(new JScrollPane(display), BorderLayout.CENTER);
+        setSize(500,300);
+        setVisable(true);
     }
 
+    //load page to display on the screen
+    private void loadpage(String userText){
+        try{
+            display.setPage(userText);
+            addressBar.setText(userText);
+        }catch(Exception e){
+            System.out.println("404 page not found");
+        }
+    }
+    
 }
